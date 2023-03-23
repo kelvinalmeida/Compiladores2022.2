@@ -23,70 +23,67 @@ void insert(struct list_tokens lista[],char str[],char value[],int i)
 
 int keyword(char* str,struct list_tokens lista[],int i)
 {
-    if(strcmp(str,"program"))
+    if(!strcmp(str,"program"))
     {
        insert(lista,"program","keyword",i);
        return 1;
     }
     
-    else if(strcmp(str,"begin"))
+    else if(!strcmp(str,"begin"))
     {
         puts("Here");
         return 2;
     }
 
-    else if(strcmp(str,"procedure"))
+    else if(!strcmp(str,"procedure"))
     {
         return 3;
     }
 
-    else if(strcmp(str,"function"))
+    else if(!strcmp(str,"function"))
     {
         return 4;
     }
 
-    else if(strcmp(str,"read"))
+    else if(!strcmp(str,"read"))
     {
         return 5;
     }
 
-    else if(strcmp(str,"write"))
+    else if(!strcmp(str,"write"))
     {
         return 6;
     }
 
-    else if(strcmp(str,"for"))
+    else if(!strcmp(str,"for"))
     {
         return 7;
     }
     
-    else if(strcmp(str,"to"))
+    else if(!strcmp(str,"to"))
     {
         return 8;
     }
     
-    else if(strcmp(str,"do begin"))
+    else if(!strcmp(str,"do begin"))
     {
         return 9;
     }
 
-    else if(strcmp(str,"do begin"))
+    else if(!strcmp(str,"do begin"))
     {
         return 10;
     }
 
-    else if(strcmp(str,"then begin"))
+    else if(!strcmp(str,"then begin"))
     {
         return 11;
     }
 
-    else if(strcmp(str,"end"))
+    else if(!strcmp(str,"end"))
     {
         return 12;
-    }
-
-
-    
+    }    
 }
 
 void prin_struct(struct list_tokens lista[],int i,int n)
