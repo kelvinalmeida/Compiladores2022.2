@@ -13,9 +13,9 @@ void insert(struct list_tokens lista[],char str[],char value[],int i)
 {
     
     strcpy(lista[i].str,str);
-    printf("%s",lista[i].str);
+    //printf("%s\n",lista[i].str);
     strcpy(lista[i].value,value);
-    printf("%s\n",lista[i].str);
+    //printf("%s\n",lista[i].str);
 
     return;
 }
@@ -31,7 +31,7 @@ int keyword(char* str,struct list_tokens lista[],int i)
     
     else if(!strcmp(str,"begin"))
     {
-        puts("Here");
+        insert(lista,"begin","keyword",i);
         return 2;
     }
 
@@ -90,7 +90,9 @@ void prin_struct(struct list_tokens lista[],int i,int n)
 {
     for(int i = 0;i < n;i++)
     {
-        printf("%s",lista[i].str);
+        printf("Valor de %d:",i);
+        printf("%s\n",lista[i].str);
+        printf("Valor de %d:",i);
         printf("%s\n",lista[i].value);
     }
     return;
@@ -110,12 +112,12 @@ int main()
  
     while (fgets(str, 50, ptr) != NULL) {
         printf("%d\n",keyword(str,lista,i));
-        int i = i + 1;
+        i = i+1;
         
     }
     fclose(ptr);
     
-   //prin_struct(lista,0,3);
+   prin_struct(lista,0,3);
     
     
     
