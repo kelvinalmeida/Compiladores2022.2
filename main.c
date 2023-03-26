@@ -1,159 +1,246 @@
-#include <stdbool.h>
+
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-//Parcial
-// Returns 'true' if the character is a DELIMITER.
-bool isDelimiter(char ch)
+#include <string.h>
+struct list_tokens // Struct para salvar 
 {
-    if (ch == ' ' || ch == '+' || ch == '-' || ch == '*' ||
-        ch == '/' || ch == ',' || ch == ';' || ch == '>' ||
-        ch == '<' || ch == '=' || ch == '(' || ch == ')' ||
-        ch == '[' || ch == ']' || ch == '{' || ch == '}')
-        return (true);
-    return (false);
-}
- 
-// Returns 'true' if the character is an OPERATOR.
-bool isOperator(char ch)
+    char str[20];
+    char value[30];
+};
+
+void continua(char acumula[],struct list_tokens lista[],int i)
 {
-    if (ch == '+' || ch == '-' || ch == '*' ||
-        ch == '/' || ch == '>' || ch == '<' ||
-        ch == '=')
-        return (true);
-    return (false);
-}
- 
-// Returns 'true' if the string is a VALID IDENTIFIER.
-bool validIdentifier(char* str)
-{
-    if (str[0] == '0' || str[0] == '1' || str[0] == '2' ||
-        str[0] == '3' || str[0] == '4' || str[0] == '5' ||
-        str[0] == '6' || str[0] == '7' || str[0] == '8' ||
-        str[0] == '9' || isDelimiter(str[0]) == true)
-        return (false);
-    return (true);
-}
- 
-// Returns 'true' if the string is a KEYWORD.
-bool isKeyword(char* str)
-{
-    if (!strcmp(str, "if") || !strcmp(str, "else") ||
-        !strcmp(str, "while") || !strcmp(str, "do") ||
-        !strcmp(str, "break") ||
-         !strcmp(str, "continue") || !strcmp(str, "int")
-        || !strcmp(str, "double") || !strcmp(str, "float")
-        || !strcmp(str, "return") || !strcmp(str, "char")
-        || !strcmp(str, "case") || !strcmp(str, "char")
-        || !strcmp(str, "sizeof") || !strcmp(str, "long")
-        || !strcmp(str, "short") || !strcmp(str, "typedef")
-        || !strcmp(str, "switch") || !strcmp(str, "unsigned")
-        || !strcmp(str, "void") || !strcmp(str, "static")
-        || !strcmp(str, "struct") || !strcmp(str, "goto"))
-        return (true);
-    return (false);
-}
- 
-// Returns 'true' if the string is an INTEGER.
-bool isInteger(char* str)
-{
-    int i, len = strlen(str);
- 
-    if (len == 0)
-        return (false);
-    for (i = 0; i < len; i++) {
-        if (str[i] != '0' && str[i] != '1' && str[i] != '2'
-            && str[i] != '3' && str[i] != '4' && str[i] != '5'
-            && str[i] != '6' && str[i] != '7' && str[i] != '8'
-            && str[i] != '9' || (str[i] == '-' && i > 0))
-            return (false);
+    while(acumula[i]!= ';')
+    {
+        lista[1].str[i-7] = acumula[i];
+        i = i + 1;
     }
-    return (true);
+    strcpy(lista[1].value,"ID");
+    lista[2].str[0] = ';';
+    strcpy(lista[2].value,"Delimiter");
+    return;
+    
 }
- 
-// Returns 'true' if the string is a REAL NUMBER.
-bool isRealNumber(char* str)
+
+void all(char acumula[],struct list_tokens lista[],int i,int n)
 {
-    int i, len = strlen(str);
-    bool hasDecimal = false;
- 
-    if (len == 0)
-        return (false);
-    for (i = 0; i < len; i++) {
-        if (str[i] != '0' && str[i] != '1' && str[i] != '2'
-            && str[i] != '3' && str[i] != '4' && str[i] != '5'
-            && str[i] != '6' && str[i] != '7' && str[i] != '8'
-            && str[i] != '9' && str[i] != '.' ||
-            (str[i] == '-' && i > 0))
-            return (false);
-        if (str[i] == '.')
-            hasDecimal = true;
+    while(acumula[i] != '.')
+    {
+    //printf("%c",acumula[i]);
+       if(acumula[i] == 'v')
+       {
+        if(acumula[i+1] == 'a')
+        {
+            if(acumula[i+2] == 'r')
+            {
+                strcpy(lista[n].str,"var");
+                strcpy(lista[n].value,"keyword");
+                //printf("%s\n",lista[n].str);
+                //printf("%s\n",lista[n].value);
+
+            }
+        }
+       }
+
+
+       else if(acumula[i] == ' ')
+       {
+          strcpy(lista[n].str,"Empty");
+          strcpy(lista[n].value,"delimiter");
+         //printf("%s\n",lista[n].str);
+         //printf("%s\n",lista[n].value);
+       }
+
+       else if(acumula[i] == 'p')//Continua daqui
+       { 
+          if(acumula[i+1] == 'r')
+          {
+            if(acumula[i+2] == 'o')
+            {
+                if(acumula[i+3] == 'c')
+                {
+                    if(acumula[i+4] == 'e')
+                    {
+                        if(acumula[i+5] == 'd')
+                        {
+                            if(acumula[i+6] == 'u')
+                            {
+                                if(acumula[i+7] == 'r')
+                                {
+                                    if(acumula[i+8] == 'e')
+                                    {
+                                        strcpy(lista[n].str,"procedure");
+                                        strcpy(lista[n].value,"keyword");
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+          } 
+       }
+
+       else if(acumula[i] == 'b')
+       { //puts("Here");
+        if(acumula[i+1] == 'e')
+        {
+            if(acumula[i+2] == 'g')
+            {
+                if(acumula[i+3] == 'i')
+                {
+                    if(acumula[i+4] == 'n')
+                    { //puts("hERE");
+                        strcpy(lista[n].str,"begin");
+                        strcpy(lista[n].value,"keyword");
+                        //printf("%s\n",lista[n].str);
+                        //printf("%s\n",lista[n].value);
+                    }
+                }
+            }
+        }
+       }
+       else if(acumula[i] == 'e')
+       {
+            if(acumula[i+1] == 'n')
+            {
+                if(acumula[i+2] == 'd')
+                {
+                    strcpy(lista[n].str,"end");
+                    strcpy(lista[n].value,"keyword");
+                    //printf("%s\n",lista[n].str);
+                    //printf("%s\n",lista[n].value);
+                }
+            }
+       }
+
+       else if(acumula[i] == 'i')
+       {
+            if(acumula[i+1] == 'n')
+            {
+                if(acumula[i+2] == 't')
+                {
+                    if(acumula[i+2] == 'e')
+                    {
+                        if(acumula[i+3] == 'g')
+                        {
+                            if(acumula[i+4] == 'e')
+                            {
+                                if(acumula[i+5] == 'r')
+                                {
+                                    strcpy(lista[n].str,"integer");
+                                    strcpy(lista[n].value,"type");
+                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+       }
+       else if(acumula[i] == '(')
+       {
+        strcpy(lista[n].str,"Quotation");
+        strcpy(lista[n].value,"delimiter");
+        
+        while(acumula[i] != ')')
+        {
+
+        }
+
+       }
+       else if(acumula[i] == '[')
+       {
+        strcpy(lista[n].str,"Quotation");
+        strcpy(lista[n].value,"delimiter");
+       }
+
+       else if(acumula[i] == ',')
+       {
+
+        strcpy(lista[n].str,"Comman");
+        strcpy(lista[n].value,"delimiter");
+       }
+       
+        else if()
+
+
+       i = i + 1;
+       n = n + 1;
     }
-    return (hasDecimal);
+   
 }
- 
-// Extracts the SUBSTRING.
-char* subString(char* str, int left, int right)
+
+void start(char acumula[],struct list_tokens lista[],int i)
 {
-    int i;
-    char* subStr = (char*)malloc(
-                  sizeof(char) * (right - left + 2));
- 
-    for (i = left; i <= right; i++)
-        subStr[i - left] = str[i];
-    subStr[right - left + 1] = '\0';
-    return (subStr);
-}
- 
-// Parsing the input STRING.
-void parse(char* str)
-{
-    int left = 0, right = 0;
-    int len = strlen(str);
- 
-    while (right <= len && left <= right) {
-        if (isDelimiter(str[right]) == false)
-            right++;
- 
-        if (isDelimiter(str[right]) == true && left == right) {
-            if (isOperator(str[right]) == true)
-                printf("'%c' IS AN OPERATOR\n", str[right]);
- 
-            right++;
-            left = right;
-        } else if (isDelimiter(str[right]) == true && left != right
-                   || (right == len && left != right)) {
-            char* subStr = subString(str, left, right - 1);
- 
-            if (isKeyword(subStr) == true)
-                printf("'%s' IS A KEYWORD\n", subStr);
- 
-            else if (isInteger(subStr) == true)
-                printf("'%s' IS AN INTEGER\n", subStr);
- 
-            else if (isRealNumber(subStr) == true)
-                printf("'%s' IS A REAL NUMBER\n", subStr);
- 
-            else if (validIdentifier(subStr) == true
-                     && isDelimiter(str[right - 1]) == false)
-                printf("'%s' IS A VALID IDENTIFIER\n", subStr);
- 
-            else if (validIdentifier(subStr) == false
-                     && isDelimiter(str[right - 1]) == false)
-                printf("'%s' IS NOT A VALID IDENTIFIER\n", subStr);
-            left = right;
+    char program;
+    if(acumula[0] == 'p')
+    {
+        if(acumula[1] == 'r')
+        {
+            if(acumula[2] == 'o')
+            {
+                if(acumula[3] == 'g')
+                {
+                    if(acumula[4] == 'r')
+                    {
+                        if(acumula[5] == 'a')
+                        {
+                            if(acumula[6] == 'm')
+                            {
+                              strcpy(lista[0].str,"program");
+                              strcpy(lista[0].value,"keyword");
+                              return;
+                            }
+                        }
+                    
+                    }
+                }
+            }
         }
     }
-    return;
+
+    
+
 }
- 
-// DRIVER FUNCTION
+
+
+// Driver code
 int main()
 {
-     // maximum length of string is 100 here
-    char str[100] = "int a = b + 1c; ";
+    FILE* ptr;
+    char str;
+    ptr = fopen("exemplo.txt", "r");
+    int i = 0;
+    struct list_tokens lista[100];
+    char acumula[200];
+    if (NULL == ptr) {
+        printf("file can't be opened \n");
+    }
  
-    parse(str); // calling the parse function
- 
-    return (0);
+    while ((str = fgetc(ptr))!= EOF) 
+    {
+        
+        //printf("Valor de i:%d ",i);
+        //printf("%c\n",str);
+        acumula[i] = str;
+        
+        i = i + 1;
+    }
+    fclose(ptr);
+    
+   start(acumula,lista,0);
+   //printf("%s\n",lista[0].str);
+   //printf("%s\n",lista[0].value);
+   continua(acumula,lista,7);
+   //printf("%s\n",lista[1].str);
+   //printf("%s\n",lista[1].value);
+   //printf("%s\n",lista[2].str);
+   //printf("%s",lista[2].value);
+   all(acumula,lista,0,3);
+    
+    
+    
+    return 0;
 }
